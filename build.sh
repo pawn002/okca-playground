@@ -7,7 +7,7 @@ cd "$(dirname "$0")"
   echo '</head>'
   echo '<body>'
   cat src/body.html
-  echo '<script type="module" src="https://cdn.jsdelivr.net/npm/@candor-design/web-components@6.0.0/dist/candor-web-components.standalone.js"></script>'
+  echo '<script type="module" src="https://cdn.jsdelivr.net/npm/@candor-design/web-components@7.0.0/dist/candor-web-components.standalone.js"></script>'
   echo '<script type="module">'; cat src/app.js; echo '</script>'
   echo '</body>'
   echo '</html>'

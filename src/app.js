@@ -148,7 +148,7 @@ function drawGrid(cv, g, marker) {
   cv.width = cv.height = W;
   const N = MAP_N, c = cv.getContext('2d'), cell = W / N, tok = (n) => resolve(getComputedStyle(document.body).getPropertyValue(n).trim());
   c.fillStyle = tok('--color-bg-subtle'); c.fillRect(0, 0, W, W);
-  c.fillStyle = tok('--color-status-success');
+  c.fillStyle = tok('--color-icon-success');
   for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g.eye[y * N + x]) c.fillRect(Math.floor(x * cell), Math.floor((N - 1 - y) * cell), Math.ceil(cell), Math.ceil(cell));
   // Lightnesses this chroma cannot reach in sRGB: hatched, so the edge of the gamut reads as a wall.
   const hatch = document.createElement('canvas'); hatch.width = hatch.height = Math.round(8 * dpr);

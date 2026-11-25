@@ -19,7 +19,7 @@ The page is one static file, `index.html`, assembled from `src/`:
 
 | File | What it is |
 |---|---|
-| `src/head.html` | Title, fonts, the inlined [Candor](https://www.npmjs.com/package/@candor-design/tokens) 6.0.0 tokens, page CSS |
+| `src/head.html` | Title, fonts, the inlined [Candor](https://www.npmjs.com/package/@candor-design/tokens) 7.0.0 tokens, page CSS |
 | `src/body.html` | The page markup |
 | `src/app.js` | All behaviour. Imports `@pawn002/okca` 3.0.0 and 2.0.3 from jsDelivr, pinned to exact versions |
 | `build.sh` | Rebuilds `index.html` from `src/` |
