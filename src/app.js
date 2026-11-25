@@ -4,6 +4,11 @@ import * as OKCA2 from 'https://cdn.jsdelivr.net/npm/@pawn002/okca@2.0.3/dist/es
 
 const TAGS = ['candor-badge', 'candor-heading', 'candor-text', 'candor-card', 'candor-switch', 'candor-radio', 'candor-input', 'candor-button', 'candor-slider', 'candor-table', 'candor-accessible-text', 'candor-code', 'candor-tabs', 'candor-tab-panel'];
 await Promise.all(TAGS.map((t) => customElements.whenDefined(t)));
+// Stopgap for pawn002/candor#376: in dark mode a checked candor-switch's deep track has no edge against the page
+// (OKCA 1.4 vs the 3.0 non-text floor). Give it the off state's control edge until Candor ships the fix.
+const switchEdge = new CSSStyleSheet();
+switchEdge.replaceSync('@media (prefers-color-scheme: dark) { .switch-input:checked + .switch-track { border-color: var(--color-border-control); } }');
+for (const sw of document.querySelectorAll('candor-switch')) { await sw.updateComplete; sw.shadowRoot?.adoptedStyleSheets.push(switchEdge); }
 
 // The veil fraction of OKCA 3.0.0's scatter observer (SCATTER_K in the package). Used only to draw
 // the veiled samples; every scatter score comes from the package itself.
@@ -157,14 +162,16 @@ function drawGrid(cv, g, marker) {
   c.fillStyle = c.createPattern(hatch, 'repeat');
   for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g.out[y * N + x]) c.fillRect(Math.floor(x * cell), Math.floor((N - 1 - y) * cell), Math.ceil(cell), Math.ceil(cell));
   // WCAG boundary: an edge wherever a cell and its neighbour disagree.
-  c.strokeStyle = tok('--color-text-default'); c.lineWidth = 2 * dpr; c.lineCap = 'round'; c.beginPath();
+  // Drawn over a page-coloured halo, so the line keeps its contrast where it meets the green cells.
+  c.lineCap = 'round'; c.beginPath();
   for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
     if (g.out[y * N + x]) continue;
     const v = g.wc[y * N + x], px = x * cell, py = (N - 1 - y) * cell;
     if (x + 1 < N && !g.out[y * N + x + 1] && g.wc[y * N + x + 1] !== v) { c.moveTo(px + cell, py); c.lineTo(px + cell, py + cell); }
     if (y + 1 < N && !g.out[(y + 1) * N + x] && g.wc[(y + 1) * N + x] !== v) { c.moveTo(px, py); c.lineTo(px + cell, py); }
   }
-  c.stroke();
+  c.strokeStyle = tok('--color-bg-page'); c.lineWidth = 4 * dpr; c.stroke();
+  c.strokeStyle = tok('--color-text-default'); c.lineWidth = 2 * dpr; c.stroke();
   if (!marker) return;
   const r = 7 * dpr, pad = r + 2 * dpr, clampXY = (v) => Math.min(W - pad, Math.max(pad, v)), hx = clampXY(marker[0] * W), hy = clampXY((1 - marker[1]) * W);
   c.lineWidth = 4 * dpr; c.strokeStyle = tok('--color-bg-page'); c.beginPath(); c.arc(hx, hy, r, 0, 2 * Math.PI); c.stroke();
