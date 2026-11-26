@@ -11,14 +11,14 @@
     <candor-tab-panel panel-id="fork" active>
       <div class="stack panel-body">
         <div class="measure stack-tight">
-          <candor-text variant="body">OKCA 3.0 had to answer one question: should light text on a dark background score at least as high as the same colours reversed?</candor-text>
-          <candor-text variant="body">Reading studies of older adults find dark text on light reads better. The optics of an eye that scatters light, as with cataract, favour the reverse. OKCA 3.0.0 implements both. Its default follows the reading studies. An experimental scatter observer follows the optics.</candor-text>
+          <p class="prose">OKCA 3.0 had to answer one question: should light text on a dark background score at least as high as the same colours reversed?</p>
+          <p class="prose">Reading studies of older adults find dark text on light reads better. The optics of an eye that scatters light, as with cataract, favour the reverse. OKCA 3.0.0 implements both. Its default follows the reading studies. An experimental scatter observer follows the optics.</p>
         </div>
         <candor-heading level="h2">The same pairs, both ways round</candor-heading>
         <div class="table-scroll"><candor-table id="fork-table" compact numeric-columns="[1,2,3,4]"></candor-table></div>
         <candor-accessible-text role_="annotation">4.5 is AA and 7.0 is AAA. The scatter option models an 80-year-old eye with the whole display bright around the text. It is experimental and outside semver: it may change or be removed in any minor release.</candor-accessible-text>
         <candor-heading level="h2">Where each answer reaches 4.5</candor-heading>
-        <candor-text variant="body" class="measure">Greys only: text lightness across, background lightness up. Green passes 4.5; the line is WCAG 2.x's own boundary, which OKCA never scores above.</candor-text>
+        <p class="prose measure">Greys only: text lightness across, background lightness up. Green passes 4.5; the line is WCAG 2.x's own boundary, which OKCA never scores above.</p>
         <div class="grid-2">
           <figure class="stack-tight fork-fig">
             <candor-text variant="label" size="sm" color="secondary">Default: follows the reading studies</candor-text>
@@ -27,7 +27,7 @@
               <div class="map-plot"><canvas id="fork-map-0" aria-hidden="true"></canvas></div>
               <div class="map-x" aria-hidden="true"><span>Dark text</span><span>Light text</span></div>
             </div>
-            <candor-text variant="body" size="sm" id="fork-read-0"></candor-text>
+            <p class="prose prose--sm" id="fork-read-0"></p>
           </figure>
           <figure class="stack-tight fork-fig">
             <candor-text variant="label" size="sm" color="secondary">Scatter: follows the optics</candor-text>
@@ -36,7 +36,7 @@
               <div class="map-plot"><canvas id="fork-map-1" aria-hidden="true"></canvas></div>
               <div class="map-x" aria-hidden="true"><span>Dark text</span><span>Light text</span></div>
             </div>
-            <candor-text variant="body" size="sm" id="fork-read-1"></candor-text>
+            <p class="prose prose--sm" id="fork-read-1"></p>
           </figure>
         </div>
         <div class="legend" aria-hidden="true">
@@ -50,7 +50,7 @@
 
     <candor-tab-panel panel-id="see">
       <div class="stack panel-body">
-        <candor-text variant="body" class="measure">Three pairs shown as a reader with ageing or low vision sees them: blurred for their acuity and veiled by the 80-year-old eye's scatter. Only the colours change.</candor-text>
+        <p class="prose measure">Three pairs shown as a reader with ageing or low vision sees them: blurred for their acuity and veiled by the 80-year-old eye's scatter. Only the colours change.</p>
         <div class="controls">
       <fieldset id="reader">
         <legend>Reader</legend>
@@ -65,7 +65,7 @@
 
     <candor-tab-panel panel-id="pair">
       <div class="stack panel-body">
-        <candor-text variant="body" class="measure">Any pair, every scorer. Samples follow the reader chosen in As a reader sees it.</candor-text>
+        <p class="prose measure">Any pair, every scorer. Samples follow the reader chosen in As a reader sees it.</p>
       <fieldset id="eyes">
         <legend>Scatter in the eye</legend>
         <candor-radio name="eye" value="0" label="None, the default observer"></candor-radio>
@@ -112,7 +112,7 @@
               <span><span class="map-tag map-tag--light">Light mode</span>top left</span>
               <span><span class="map-tag map-tag--dark">Dark mode</span>bottom right</span>
             </div>
-            <candor-text variant="body" size="sm" id="map-read"></candor-text>
+            <p class="prose prose--sm" id="map-read"></p>
           </div>
         </div>
         <div class="stack" aria-live="polite">
@@ -127,32 +127,32 @@
       <div class="stack panel-body measure">
         <section class="stack-tight" aria-labelledby="n-d-scores">
           <candor-heading level="h2" id="n-d-scores">How to read the scores</candor-heading>
-          <candor-text variant="body"><strong>WCAG 2.x</strong> is shown unrounded, and its verdict compares the exact ratio to 4.5 and 7.0.</candor-text>
-          <candor-text variant="body"><strong>This reader</strong> is the OKCA 3.0 score with the 80-year-old eye's scatter, for either reader. Its verdict compares it with the threshold WCAG wrote for that reader: 4.5 for the 20/40 reader, 7.0 for the 20/80 reader.</candor-text>
-          <candor-text variant="body"><strong>OKCA never scores a pair above WCAG</strong>, so a pair that is enough for OKCA is enough for WCAG.</candor-text>
-          <candor-text variant="body"><strong>Verdicts</strong> on WCAG and the scorer table: passes AAA at 7.0 or more, passes AA at 4.5, large text only at 3.0, otherwise fails.</candor-text>
+          <p class="prose"><strong>WCAG 2.x</strong> is shown unrounded, and its verdict compares the exact ratio to 4.5 and 7.0.</p>
+          <p class="prose"><strong>This reader</strong> is the OKCA 3.0 score with the 80-year-old eye's scatter, for either reader. Its verdict compares it with the threshold WCAG wrote for that reader: 4.5 for the 20/40 reader, 7.0 for the 20/80 reader.</p>
+          <p class="prose"><strong>OKCA never scores a pair above WCAG</strong>, so a pair that is enough for OKCA is enough for WCAG.</p>
+          <p class="prose"><strong>Verdicts</strong> on WCAG and the scorer table: passes AAA at 7.0 or more, passes AA at 4.5, large text only at 3.0, otherwise fails.</p>
         </section>
         <section class="stack-tight" aria-labelledby="n-d-drawn">
           <candor-heading level="h2" id="n-d-drawn">How the samples are drawn</candor-heading>
-        <candor-text variant="body"><strong>Blur.</strong> Acuity is converted to CSS pixels through the CSS reference pixel, about 1.28 minutes of arc at arm's length. A 20/40 eye resolves detail of about 2 minutes, a 20/80 eye about 4, which gives a blur of about 1.6 and 3.1 px. It is approximate: the step from acuity to blur width is uncertain by up to a factor of two, and this page takes the stronger end.</candor-text>
-        <candor-text variant="body"><strong>Text size.</strong> For the low-vision reader the sample text is doubled. At arm's length, 16 px capitals are about 14 minutes of arc tall, and a 20/80 eye needs about 20 to read a letter. Acuity is measured with black letters on white, so 20/80 already describes that eye at close to the most contrast a screen can give; more contrast cannot carry it much past that size. A reader with that eye enlarges text, and so does this page. Doubling both the blur and the text leaves the letters as blurred, relative to their size, as for the 20/40 reader, so what changes the picture is contrast.</candor-text>
-        <candor-text variant="body"><strong>Veil.</strong> The text is shifted toward the background by the veil the chosen eye's scatter adds, exactly as the scatter score assumes. Both readers carry it: the 20/80 reader has everything the 20/40 reader has, and more. Its own scatter is not measured, so the 80-year-old veil is a floor for it, not an estimate.</candor-text>
-        <candor-text variant="body"><strong>Fairness.</strong> The blur and veil are the same on every pair, so only the colours change between samples.</candor-text>
-        <candor-text variant="body"><strong>Limits.</strong> A blur stands in for optical loss only; retinal loss such as macular degeneration is not modelled. Your screen, zoom, room and own eyes add their own effects. The scores, not the pictures, are the measure.</candor-text>
+        <p class="prose"><strong>Blur.</strong> Acuity is converted to CSS pixels through the CSS reference pixel, about 1.28 minutes of arc at arm's length. A 20/40 eye resolves detail of about 2 minutes, a 20/80 eye about 4, which gives a blur of about 1.6 and 3.1 px. It is approximate: the step from acuity to blur width is uncertain by up to a factor of two, and this page takes the stronger end.</p>
+        <p class="prose"><strong>Text size.</strong> For the low-vision reader the sample text is doubled. At arm's length, 16 px capitals are about 14 minutes of arc tall, and a 20/80 eye needs about 20 to read a letter. Acuity is measured with black letters on white, so 20/80 already describes that eye at close to the most contrast a screen can give; more contrast cannot carry it much past that size. A reader with that eye enlarges text, and so does this page. Doubling both the blur and the text leaves the letters as blurred, relative to their size, as for the 20/40 reader, so what changes the picture is contrast.</p>
+        <p class="prose"><strong>Veil.</strong> The text is shifted toward the background by the veil the chosen eye's scatter adds, exactly as the scatter score assumes. Both readers carry it: the 20/80 reader has everything the 20/40 reader has, and more. Its own scatter is not measured, so the 80-year-old veil is a floor for it, not an estimate.</p>
+        <p class="prose"><strong>Fairness.</strong> The blur and veil are the same on every pair, so only the colours change between samples.</p>
+        <p class="prose"><strong>Limits.</strong> A blur stands in for optical loss only; retinal loss such as macular degeneration is not modelled. Your screen, zoom, room and own eyes add their own effects. The scores, not the pictures, are the measure.</p>
         </section>
         <section class="stack-tight" aria-labelledby="n-d-eyes">
           <candor-heading level="h2" id="n-d-eyes">About these readers and eyes</candor-heading>
           <candor-heading level="h3">Readers</candor-heading>
-          <candor-text variant="body"><strong>About 80 years old, 20/40.</strong> WCAG's 4.5:1 is written for this reader: 20/40 acuity carries a contrast-sensitivity loss of about 1.5, and 3 × 1.5 = 4.5. WCAG names age 80 only as the age at which 20/40 is typical.</candor-text>
-          <candor-text variant="body"><strong>Low vision, 20/80.</strong> WCAG's 7:1 is written for this reader, by the same reasoning. The two are points on one line, not two kinds of reader: required contrast grows with the loss. Past 20/80, WCAG expects readers to use assistive technology.</candor-text>
-          <candor-text variant="body"><strong>What WCAG does not model.</strong> Its reasoning is built from acuity alone. Cataract, glare and scatter are not mentioned; clouded eyes are only implicit in the people behind its data. The veils below are OKCA's addition, not part of WCAG's thresholds.</candor-text>
+          <p class="prose"><strong>About 80 years old, 20/40.</strong> WCAG's 4.5:1 is written for this reader: 20/40 acuity carries a contrast-sensitivity loss of about 1.5, and 3 × 1.5 = 4.5. WCAG names age 80 only as the age at which 20/40 is typical.</p>
+          <p class="prose"><strong>Low vision, 20/80.</strong> WCAG's 7:1 is written for this reader, by the same reasoning. The two are points on one line, not two kinds of reader: required contrast grows with the loss. Past 20/80, WCAG expects readers to use assistive technology.</p>
+          <p class="prose"><strong>What WCAG does not model.</strong> Its reasoning is built from acuity alone. Cataract, glare and scatter are not mentioned; clouded eyes are only implicit in the people behind its data. The veils below are OKCA's addition, not part of WCAG's thresholds.</p>
           <candor-heading level="h3">Scatter in the eye</candor-heading>
-          <candor-text variant="body"><strong>None, the default observer</strong> is what OKCA 3.0 scores by default, and what the published scores assume.</candor-text>
-          <candor-text variant="body"><strong>80-year-old eye, full display</strong> is the glare veil of an 80-year-old eye, with the whole display around the text as its source. It applies to both readers, and is a floor for the 20/80 reader.</candor-text>
+          <p class="prose"><strong>None, the default observer</strong> is what OKCA 3.0 scores by default, and what the published scores assume.</p>
+          <p class="prose"><strong>80-year-old eye, full display</strong> is the glare veil of an 80-year-old eye, with the whole display around the text as its source. It applies to both readers, and is a floor for the 20/80 reader.</p>
           <candor-heading level="h3">Dark mode and this model</candor-heading>
-          <candor-text variant="body">The scatter veil grows with the background's brightness, so a dark background adds almost no veil and a light one adds a lot. For the 80-year-old eye, near-black (#121212) on white falls from 18.4 to 5.0 while white on near-black falls only from 15.6 to 15.3, and no dark-on-light pair reaches 7.0. Under this model, dark mode is the easiest way to pass, and for that eye the only way to AAA.</candor-text>
-          <candor-text variant="body">That is a claim about the score, not about reading. The reading studies still find dark text on light reads better for typical older readers; the reversal is measured in eyes with clouded media, such as cataract. The 80-year-old eye also assumes the whole display is bright behind the text, its worst case; a weaker veil returns much of the light-mode region. And light text on dark has costs the model does not score: halation for readers with astigmatism, and a wider pupil in a darker room.</candor-text>
-          <candor-text variant="body">The scatter observer is experimental and outside semver: it may change or be removed in any minor release. Use it as <code>contrast(fg, bg, { observer: 'scatter' })</code>.</candor-text>
+          <p class="prose">The scatter veil grows with the background's brightness, so a dark background adds almost no veil and a light one adds a lot. For the 80-year-old eye, near-black (#121212) on white falls from 18.4 to 5.0 while white on near-black falls only from 15.6 to 15.3, and no dark-on-light pair reaches 7.0. Under this model, dark mode is the easiest way to pass, and for that eye the only way to AAA.</p>
+          <p class="prose">That is a claim about the score, not about reading. The reading studies still find dark text on light reads better for typical older readers; the reversal is measured in eyes with clouded media, such as cataract. The 80-year-old eye also assumes the whole display is bright behind the text, its worst case; a weaker veil returns much of the light-mode region. And light text on dark has costs the model does not score: halation for readers with astigmatism, and a wider pupil in a darker room.</p>
+          <p class="prose">The scatter observer is experimental and outside semver: it may change or be removed in any minor release. Use it as <code>contrast(fg, bg, { observer: 'scatter' })</code>.</p>
         </section>
       </div>
     </candor-tab-panel>
