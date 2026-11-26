@@ -122,7 +122,7 @@ function renderRows(fg, bg) {
   t.rows = r.map(([n, v, txt], i) => ({ cells: [i === cur ? `${n} (chosen eye)` : n, txt || v.toFixed(1), badge(v)], isHeader: true }));
 }
 
-// The map: text lightness across, background lightness up, each at its colour's own hue.
+// The map: text lightness across, background lightness down (dark at the top), each at its colour's own hue.
 // Recomputed only when something other than the two lightnesses changes; dragging a slider
 // only moves the marker.
 const EYE_NAME = { 0: 'default observer', [FULL]: '80-year-old eye' };
@@ -154,26 +154,26 @@ function drawGrid(cv, g, marker) {
   const N = MAP_N, c = cv.getContext('2d'), cell = W / N, tok = (n) => resolve(getComputedStyle(document.body).getPropertyValue(n).trim());
   c.fillStyle = tok('--color-bg-subtle'); c.fillRect(0, 0, W, W);
   c.fillStyle = tok('--color-icon-success');
-  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g.eye[y * N + x]) c.fillRect(Math.floor(x * cell), Math.floor((N - 1 - y) * cell), Math.ceil(cell), Math.ceil(cell));
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g.eye[y * N + x]) c.fillRect(Math.floor(x * cell), Math.floor(y * cell), Math.ceil(cell), Math.ceil(cell));
   // Lightnesses this chroma cannot reach in sRGB: hatched, so the edge of the gamut reads as a wall.
   const hatch = document.createElement('canvas'); hatch.width = hatch.height = Math.round(8 * dpr);
   const hc = hatch.getContext('2d'); hc.fillStyle = tok('--color-bg-page'); hc.fillRect(0, 0, hatch.width, hatch.height);
   hc.strokeStyle = tok('--color-border-strong'); hc.lineWidth = dpr; hc.beginPath(); hc.moveTo(0, hatch.height); hc.lineTo(hatch.width, 0); hc.stroke();
   c.fillStyle = c.createPattern(hatch, 'repeat');
-  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g.out[y * N + x]) c.fillRect(Math.floor(x * cell), Math.floor((N - 1 - y) * cell), Math.ceil(cell), Math.ceil(cell));
+  for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) if (g.out[y * N + x]) c.fillRect(Math.floor(x * cell), Math.floor(y * cell), Math.ceil(cell), Math.ceil(cell));
   // WCAG boundary: an edge wherever a cell and its neighbour disagree.
   // Drawn over a page-coloured halo, so the line keeps its contrast where it meets the green cells.
   c.lineCap = 'round'; c.beginPath();
   for (let y = 0; y < N; y++) for (let x = 0; x < N; x++) {
     if (g.out[y * N + x]) continue;
-    const v = g.wc[y * N + x], px = x * cell, py = (N - 1 - y) * cell;
+    const v = g.wc[y * N + x], px = x * cell, py = y * cell;
     if (x + 1 < N && !g.out[y * N + x + 1] && g.wc[y * N + x + 1] !== v) { c.moveTo(px + cell, py); c.lineTo(px + cell, py + cell); }
-    if (y + 1 < N && !g.out[(y + 1) * N + x] && g.wc[(y + 1) * N + x] !== v) { c.moveTo(px, py); c.lineTo(px + cell, py); }
+    if (y + 1 < N && !g.out[(y + 1) * N + x] && g.wc[(y + 1) * N + x] !== v) { c.moveTo(px, py + cell); c.lineTo(px + cell, py + cell); }
   }
   c.strokeStyle = tok('--color-bg-page'); c.lineWidth = 4 * dpr; c.stroke();
   c.strokeStyle = tok('--color-text-default'); c.lineWidth = 2 * dpr; c.stroke();
   if (!marker) return;
-  const r = 7 * dpr, pad = r + 2 * dpr, clampXY = (v) => Math.min(W - pad, Math.max(pad, v)), hx = clampXY(marker[0] * W), hy = clampXY((1 - marker[1]) * W);
+  const r = 7 * dpr, pad = r + 2 * dpr, clampXY = (v) => Math.min(W - pad, Math.max(pad, v)), hx = clampXY(marker[0] * W), hy = clampXY(marker[1] * W);
   c.lineWidth = 4 * dpr; c.strokeStyle = tok('--color-bg-page'); c.beginPath(); c.arc(hx, hy, r, 0, 2 * Math.PI); c.stroke();
   c.lineWidth = 2 * dpr; c.strokeStyle = tok('--color-text-default'); c.beginPath(); c.arc(hx, hy, r, 0, 2 * Math.PI); c.stroke();
 }
@@ -274,7 +274,7 @@ $('BL').addEventListener('input', (e) => { const hex = bgAt(+e.detail); state.b 
 // Clicking or dragging on the map sets both lightnesses; the sliders stay the keyboard route.
 const mapPick = (e) => {
   const r = $('map').getBoundingClientRect(), clampTo = (v, [lo, hi]) => Math.min(hi, Math.max(lo, v));
-  const tl = clampTo((e.clientX - r.left) / r.width, state.tRange), bl = clampTo(1 - (e.clientY - r.top) / r.height, state.bRange);
+  const tl = clampTo((e.clientX - r.left) / r.width, state.tRange), bl = clampTo((e.clientY - r.top) / r.height, state.bRange);
   $('L').value = +tl.toFixed(3); $('BL').value = +bl.toFixed(3);
   state.a = textAt(tl); state.b = bgAt(bl);
   for (const [s, v] of [['a', state.a], ['b', state.b]]) { $(s + '-hex').value = v; $(s + '-pick').value = v; }
